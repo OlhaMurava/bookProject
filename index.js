@@ -12,7 +12,7 @@ const db = new pg.Client({
     user: "postgres",
     host: "localhost",
     database: "books",
-    password: "2856",
+    password: "****",
     port: 5432,
 })
 
