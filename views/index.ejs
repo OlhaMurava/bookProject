@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Collection</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <div class="main-box">
+        <div class="add-book">
+            <h1 class="newbook">Add New Book</h1>
+            <form action="/add-book" method="POST" class="book-form">
+                <input type="text" name="title" placeholder="Book Title" required>
+                <input type="text" name="author" placeholder="Author" required>
+                <input type="text" name="isbn" placeholder="ISBN" required>
+                <textarea name="description" placeholder="Book Description"></textarea>
+                <input type="number" name="rating" placeholder="Rating (1-5)" min="1" max="5">
+                <button type="submit">Add Book</button>
+            </form>
+        </div>
+        <div class="container">
+            <h1 class="newheading">List of Books</h1>
+            <ol>
+                <% bookItems.forEach(book => { %>
+                    <li class="abook">
+                        <div class="book-details">
+                            <img class="cover" src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-M.jpg" alt="Book Cover of <%= book.title %>" onerror="this.onerror=null;this.src='/images/placeholder.jpg'; this.alt='No Cover Available'"/>
+                            <div class="book-info">
+                                <h2><%= book.title %></h2>
+                                <p><strong>Author:</strong> <%= book.author %></p>
+                                <p class="book-description"><%= book.description %></p>
+                                <p class="rating">Rating: <%= book.rating %></p>
+                                <form action="/update-book/<%= book.isbn %>" method="get" class="edit-form">
+                                    <input type="hidden" name="isbn" value="<%= book.isbn %>">
+                                    <button class="edit-btn" type="submit">Edit</button>
+                                </form>
+                                <form action="/delete-book" method="post" class="delete-form">
+                                    <input type="hidden" name="isbn" value="<%= book.isbn %>">
+                                    <button class="delete-btn" type="submit">Delete</button>
+                                </form>                              
+                            </div>
+                        </div>
+                    </li>
+                <% }) %>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

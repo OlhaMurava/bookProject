@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main container */
+.main-box {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Edit Book header */
+.newbook {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4CAF50;
+}
+
+/* Form container */
+.book-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form input styles */
+.book-form input,
+.book-form textarea,
+.book-form button {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+.book-form input:focus,
+.book-form textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Textarea specific styling */
+.book-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Rating input styling */
+.book-form input[type="number"] {
+    width: 50px;
+}
+
+/* Button styles */
+.book-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+.book-form button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .main-box {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .newbook {
+        font-size: 1.5em;
+    }
+}
