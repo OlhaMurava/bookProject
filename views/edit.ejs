@@ -10,15 +10,38 @@
     <div class="main-box">
         <div class="edit-book">
             <h1 class="newbook">Edit Book</h1>
-            <form action="/update-book" method="POST" class="book-form">
-                <input type="hidden" name="isbn" value="<%= book.isbn %>">
-                <input type="text" name="title" value="<%= book.title %>" required>
-                <input type="text" name="author" value="<%= book.author %>" required>
-                <textarea name="description"><%= book.description %></textarea>
-                <input type="number" name="rating" value="<%= book.rating %>" min="1" max="5">
+            <form id="edit-form" class="book-form">
+                <input type="hidden" id="isbn" value="<%= book.isbn %>">
+                <input type="text" id="title" value="<%= book.title %>" required>
+                <input type="text" id="author" value="<%= book.author %>" required>
+                <textarea id="description"><%= book.description %></textarea>
+                <input type="number" id="rating" value="<%= book.rating %>" min="1" max="5">
                 <button type="submit">Update Book</button>
             </form>
         </div>
     </div>
+    
+    <script>
+        document.getElementById("edit-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const isbn = document.getElementById("isbn").value;
+            const title = document.getElementById("title").value;
+            const author = document.getElementById("author").value;
+            const description = document.getElementById("description").value;
+            const rating = document.getElementById("rating").value;
+            
+            const response = await fetch(`/books/${isbn}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, author, description, rating })
+            });
+            
+            if (response.ok) {
+                window.location.href = "/";
+            } else {
+                alert("Error updating book");
+            }
+        });
+    </script>
 </body>
 </html>
