@@ -10,7 +10,7 @@
     <div class="main-box">
         <div class="add-book">
             <h1 class="newbook">Add New Book</h1>
-            <form action="/add-book" method="POST" class="book-form">
+            <form action="/books" method="POST" class="book-form">
                 <input type="text" name="title" placeholder="Book Title" required>
                 <input type="text" name="author" placeholder="Author" required>
                 <input type="text" name="isbn" placeholder="ISBN" required>
@@ -31,14 +31,8 @@
                                 <p><strong>Author:</strong> <%= book.author %></p>
                                 <p class="book-description"><%= book.description %></p>
                                 <p class="rating">Rating: <%= book.rating %></p>
-                                <form action="/update-book/<%= book.isbn %>" method="get" class="edit-form">
-                                    <input type="hidden" name="isbn" value="<%= book.isbn %>">
-                                    <button class="edit-btn" type="submit">Edit</button>
-                                </form>
-                                <form action="/delete-book" method="post" class="delete-form">
-                                    <input type="hidden" name="isbn" value="<%= book.isbn %>">
-                                    <button class="delete-btn" type="submit">Delete</button>
-                                </form>                              
+                                <a href="/books/<%= book.isbn %>"><button class="edit-btn">Edit</button></a>
+                                <button class="delete-btn" onclick="deleteBook('<%= book.isbn %>')">Delete</button>
                             </div>
                         </div>
                     </li>
@@ -46,5 +40,18 @@
             </ol>
         </div>
     </div>
+    
+    <script>
+        async function deleteBook(isbn) {
+            if (confirm("Are you sure you want to delete this book?")) {
+                const response = await fetch(`/books/${isbn}`, { method: "DELETE" });
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert("Error deleting book");
+                }
+            }
+        }
+    </script>
 </body>
 </html>
